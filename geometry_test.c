@@ -145,24 +145,45 @@ START_TEST(test_2d_midpoint)
 }
 END_TEST
 
-START_TEST(test_2d_area_triangle){
+START_TEST(test_2d_area_triangle)
+{
     coord_2d_t a;
     coord_2d_t b;
     coord_2d_t c;
-    a.x = a.y = 0;
-    b.x = b.y = 1;
-    c.x = 1;
-    c.y = 0;
-    
-    ck_assert(coord_2d_area_triangle(&a,&b,&c) == 0.5);
+    float known_area;
+    float test_area;
 
-    a.x = 1
+    a.x = 0;
     a.y = 0;
-    b.x = b.y = 1;
-    c.x = 1;
-    c.y = 0;
+    b.x = 3;
+    b.y = 0;
+    c.x = 1.5;
+    c.y = 1.5;
+    test_area = coord_2d_area_triangle(&a, &b, &c);
+    known_area = 0.5 * b.x * c.y;
+    printf("%f\n",known_area);
+    ck_assert(known_area==test_area);
 
-    ck_assert(coord_2d_area_triangle(&a,&b,&c) == 0.5)
+    a.x = 0;
+    a.y = 0;
+    b.x = 5;
+    b.y = 0;
+    c.x = 2.5;
+    c.y = 6;
+    test_area = coord_2d_area_triangle(&a, &b, &c);
+    known_area = 0.5 * b.x * c.y;
+    printf("%f\n",known_area);
+    ck_assert(known_area==test_area);
+
+    a.x = 0;
+    a.y = 0;
+    b.x = 1;
+    b.y = 0;
+    c.x = -1;
+    c.y = 1;
+    test_area = coord_2d_area_triangle(&a, &b, &c);
+    known_area = 0.5 * b.x * c.y;
+    ck_assert(known_area==test_area);
 
 }
 END_TEST
